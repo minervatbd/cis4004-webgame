@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>JavaScript Demo</title>
+   <meta charset="UTF-8">
+</head>
+<body>
+
+
+ <! -- BUTTONS  --> 
+<h1>Interactive Fiction Game Menu</h1>
+
+<button onclick="Function1()">Swords and Sorcerers</button>
+<p id="demo1"></p>
+
+<button onclick="Function2()">Here Be Dragons</button>
+<p id="demo2"></p>
+
+<button onclick="Function3()">The Adventurers of Starry Sid</button>
+<p id="demo3"></p>
+
+<button onclick="Function4()">Escape!!!</button>
+<p id="demo4"></p>
+
+<! -- CSS  --> 
+<style>
+#demo1 {   
+   font-size: 28pt;
+   background: repeating-radial-gradient(pink, yellow, lightblue 15%);
+}
+#demo2 {   
+   font-size: 28pt;
+   background: linear-gradient(to right, red, black);
+}
+#demo3 {   
+   font-size: 28pt;
+   background: repeating-linear-gradient(to top left, DodgerBlue, Gainsboro 10%);
+}
+#demo4 {   
+   font-size: 28pt;
+   background: radial-gradient(at 80% 80%, gray, white);
+}
+</style>
+
+
+<! -- JAVASCRIPT  --> 
+<script>
+  
+function Function1() {
+  document.getElementById("demo1").innerHTML = window.confirm("This is a pop-up!");
+}
+
+function Function2() {
+  document.getElementById("demo2").innerHTML = window.confirm("Second button!");
+}
+
+function Function3() {
+  document.getElementById("demo3").innerHTML = window.confirm("Third");
+}
+
+function Function4() {
+  document.getElementById("demo4").innerHTML = window.confirm("Last button!");
+}
+ 
+ 
+   </script>
+
+
+</body>
+</html>
