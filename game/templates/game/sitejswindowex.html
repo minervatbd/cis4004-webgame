@@ -66,5 +66,80 @@ function Function4() {
    </script>
 
 
+<style>
+.dr {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dr:hover, .dr:focus {
+  background-color: #2980B9;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.co {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.co a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+</style>
+</head>
+<body style="background-color:white;">
+
+<div class="dropdown">
+  <button onclick="myFunction()" class="dr">Dropdown</button>
+  <div id="md" class="co">
+    <a href="#ss">Swords and Sorcerers</a>
+    <a href="#dragons">Here Be Dragons</a>
+    <a href="#star">The Adventurers of Starry Sid</a>
+    <a href="#escape">Escape!!!</a>
+  </div>
+</div>
+
+<script>
+
+function myFunction() {
+  document.getElementById("md").classList.toggle("show");
+}
+
+
+window.onclick = function(event) {
+  if (!event.target.matches('.dr')) {
+    var menu = document.getElementsByClassName("co");
+    var i;
+    for (i = 0; i < menu.length; i++) {
+      var open= menu[i];
+      if (open.classList.contains('show')) {
+        open.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+
+
 </body>
 </html>
