@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Authentication Example</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <h1>Login with Google</h1>
+    <!-- Google Sign-In button -->
+    <div id="g_id_onload"
+         data-client_id="YOUR_GOOGLE_CLIENT_ID" 
+         data-login_uri="YOUR_BACKEND_SERVER_URI"
+         data-auto_prompt="false">
+    </div>
+
+    <div id="g-signin2"></div>
+
+    <script>
+        function handleCredentialResponse(response) {
+            console.log('Encoded JWT ID token: ' + response.credential);
+            // Send the response.credential to your backend server for verification
+        }
+
+        window.onload = function () {
+            google.accounts.id.initialize({
+                client_id: "YOUR_GOOGLE_CLIENT_ID",
+                callback: handleCredentialResponse
+            });
+            google.accounts.id.renderButton(
+                document.getElementById("g-signin2"),
+                { theme: "outline", size: "large" }  // Customize button style
+            );
+        }
+    </script>
+</body>
+</html>
