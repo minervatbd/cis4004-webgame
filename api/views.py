@@ -5,6 +5,7 @@ from .models import Game
 from .serializers import GameSerializer
 from rest_framework import serializers
 from rest_framework import status
+from django.shortcuts import get_object_or_404
 
 @api_view(['GET'])
 def ApiOverview(request):
@@ -32,3 +33,36 @@ def add_games(request):
         return Response(game.data)
     else:
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['GET'])
+def view_games(request):
+     
+    # checking for the parameters from the URL
+    if request.query_params:
+        games = Game.objects.filter(**request.query_params.dict())
+    else:
+        games = Game.objects.all()
+ 
+    # if there is something in games else raise error
+    if games:
+        serializer = GameSerializer(games, many=True)
+        return Response(serializer.data)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['POST'])
+def update_games(request, pk):
+    game = Game.objects.get(pk=pk)
+    data = GameSerializer(instance=game, data=request.data)
+ 
+    if data.is_valid():
+        data.save()
+        return Response(data.data)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['DELETE'])
+def delete_games(request, pk):
+    game = get_object_or_404(Game, pk=pk)
+    game.delete()
+    return Response(status=status.HTTP_202_ACCEPTED)
