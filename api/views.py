@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Game
-from .serializers import GameSerializer
+from .models import Game, User
+from .serializers import GameSerializer, UserSerializer
 from rest_framework import serializers
 from rest_framework import status
 from django.shortcuts import get_object_or_404
@@ -66,3 +66,17 @@ def delete_games(request, pk):
     game = get_object_or_404(Game, pk=pk)
     game.delete()
     return Response(status=status.HTTP_202_ACCEPTED)
+
+@api_view(['POST'])
+def add_users(request):
+    user = UserSerializer(data=request.data)
+ 
+    # validating for already existing data
+    if User.objects.filter(**request.data).exists():
+        raise serializers.ValidationError('This data already exists')
+ 
+    if user.is_valid():
+        user.save()
+        return Response(user.data)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
