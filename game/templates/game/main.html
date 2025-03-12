@@ -4,14 +4,22 @@
     <head>
         <meta charset="utf-8" />
         <title>Hello</title>
-        <script src="{% static 'game/games.js' %}"></script>
+        <script src="{% static 'game/register.js' %}"></script>
     </head>
     <body>
         <h1>Test page!</h1>
         <h2>try the button</h2>
         <button type="button">Button</button>
         <p>It's {{ date | date:"l, d F, Y" }} at {{ date | time:"H:i:s" }}</p>
-
+        <form id="registerForm">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" /><br>
+            <label for="email">Email:</label><br>
+            <input type="text" id="email" /><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" /><br>
+            <input type="submit">
+        </form>
         <h1>Add a game</h1>
         <label for="titleInput">Title:</label><br>
         <input type="text" id="titleInput" /><br>
@@ -35,6 +43,9 @@
         <script>
             document.getElementById("searchInput").addEventListener("input", function (e) {
                 searchGames(e.target.value.trim());
+            });
+            document.getElementById("registerForm").addEventListener("submit", function (e) {
+                registerUser(e);
             });
         </script>
     </body>
