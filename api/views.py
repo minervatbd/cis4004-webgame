@@ -15,7 +15,8 @@ def ApiOverview(request):
         'Search by Developer': '/?developer=developer_name',
         'Add': '/create',
         'Update': '/update/pk',
-        'Delete': '/game/pk/delete'
+        'Delete': '/game/pk/delete',
+        'Register': '/register',
     }
     
     return Response(api_urls)
