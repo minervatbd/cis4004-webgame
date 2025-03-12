@@ -17,6 +17,7 @@ def ApiOverview(request):
         'Update': '/update/pk',
         'Delete': '/game/pk/delete',
         'Register': '/register',
+        'Login': '/login',
     }
     
     return Response(api_urls)
@@ -81,3 +82,11 @@ def add_users(request):
         return Response(user.data)
     else:
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['POST'])
+def login(request):
+    data = request.data
+    userObj = get_object_or_404(User, username=data["username"], password=data["password"])
+
+    user = UserSerializer(userObj)
+    return Response(user.data)
