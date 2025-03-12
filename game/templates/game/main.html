@@ -20,7 +20,7 @@
         <label for="yearInput">Year:</label><br>
         <input type="text" id="yearInput" /><br>
         <button onclick="saveGame()">Save</button><br><br>
-        <button onclick="searchGames('')">Load games</button>
+        <input type="text" id="searchInput" placeholder="Search by title..." /><br>
         <table class="games-table">
             <thead>
                 <tr>
@@ -32,5 +32,10 @@
             </thead>
             <tbody id="gamesBody"></tbody>
         </table>
+        <script>
+            document.getElementById("searchInput").addEventListener("input", function (e) {
+                searchGames(e.target.value.trim());
+            });
+        </script>
     </body>
 </html>

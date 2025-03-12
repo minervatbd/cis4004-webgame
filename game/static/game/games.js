@@ -5,25 +5,24 @@ window.onload = () => {
     searchGames("");
 };
 
-function searchGames(query) {
-    const payload = {
-        search: query
-    };
+async function searchGames(query) {
 
-    fetch(`${urlBase}/all/`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-    })
-        .then((res) => res.json())
-        .then((data) => {
-            if (data.error) {
-                alert("Error searching games: " + data.error);
+    let search = "";
+    if (query != "") search = `title=${query}`;
+
+    try {
+        let response = await fetch(`${urlBase}/all/?${search}`)
+        if (response != null) {
+            let games = await response.json()
+            if (games.error) {
+                alert("Error searching games: " + games.error);
             } else {
-                displayGames(data.results || []);
+                displayGames(games || []);
             }
-        })
-        .catch((err) => console.error(err));
+        }
+        
+    } catch(err) {console.error(err);}
+    
 }
 
 function displayGames(games) {
@@ -35,14 +34,15 @@ function displayGames(games) {
         return;
     }
 
-    contacts.forEach((c) => {
+    games.forEach((c) => {
+        console.log(c);
         const row = document.createElement("tr");
         row.innerHTML = `
       <td>${c.title}</td>
       <td>${c.developer}</td>
       <td>${c.year}</td>
       <td class="table-actions">
-        <button onclick='deleteGame(${c.ID})'>Delete</button>
+        <button onclick='deleteGame(${c.id})'>Delete</button>
       </td>
     `;
         tbody.appendChild(row);
@@ -78,10 +78,22 @@ function saveGame() {
             } else {
                 alert("Added game!")
                 }
+                searchGames("");
         })
         .catch((err) => console.error(err));
 }
 
-function deleteGame(gameId) {
-    alert(`this button wouldve deleted game id: ${gameId}`);
+async function deleteGame(gameId) {
+    const payload = {
+        id: gameId,
+    };
+
+    try {
+        let response = await fetch(`${urlBase}/game/${gameId}/delete/`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        });
+        searchGames("");
+        
+    } catch(err) {console.error(err);}
 }
