@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8" />
         <title>Hello</title>
-        <script src="{% static 'game/register.js' %}"></script>
+        <script src="{% static 'game/login.js' %}"></script>
     </head>
     <body>
         <h1>Test page!</h1>
@@ -12,10 +12,17 @@
         <button type="button">Button</button>
         <p>It's {{ date | date:"l, d F, Y" }} at {{ date | time:"H:i:s" }}</p>
         <form id="registerForm">
-            <label for="username">Username:</label><br>
-            <input type="text" id="username" /><br>
+            <label for="usernameRegister">Username:</label><br>
+            <input type="text" id="usernameRegister" /><br>
             <label for="email">Email:</label><br>
             <input type="text" id="email" /><br>
+            <label for="passwordRegister">Password:</label><br>
+            <input type="password" id="passwordRegister" /><br>
+            <input type="submit">
+        </form>
+        <form id="loginForm">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" /><br>
             <label for="password">Password:</label><br>
             <input type="password" id="password" /><br>
             <input type="submit">
@@ -46,6 +53,9 @@
             });
             document.getElementById("registerForm").addEventListener("submit", function (e) {
                 registerUser(e);
+            });
+            document.getElementById("loginForm").addEventListener("submit", function (e) {
+                login(e);
             });
         </script>
     </body>
