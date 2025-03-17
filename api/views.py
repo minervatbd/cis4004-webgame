@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Game, User
-from .serializers import GameSerializer, UserSerializer
+from .models import Game, User, Log
+from .serializers import GameSerializer, UserSerializer, LogSerializer
 from rest_framework import serializers
 from rest_framework import status
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, get_list_or_404
 
 @api_view(['GET'])
 def ApiOverview(request):
@@ -18,6 +18,11 @@ def ApiOverview(request):
         'Delete': '/game/pk/delete',
         'Register': '/register',
         'Login': '/login',
+        'Get Game from ID': '/game/pk/get',
+        'Get User Logs': '/user/pk',
+        'Add Log': '/createlog',
+        'Edit Log': '/log/pk/update',
+        'Delete Log': '/log/pk/delete',
     }
     
     return Response(api_urls)
@@ -90,3 +95,32 @@ def login(request):
 
     user = UserSerializer(userObj)
     return Response(user.data)
+
+@api_view(['GET'])
+def get_game_from_id(request, pk):
+    gameObj = get_object_or_404(Game, pk=pk)
+
+    game = GameSerializer(gameObj)
+    return Response(game.data)
+
+@api_view(['POST'])
+def add_log(request):
+    log = LogSerializer(data=request.data)
+
+    # validating for already existing data
+    if Log.objects.filter(**request.data).exists():
+        raise serializers.ValidationError('This data already exists')
+    
+    if log.is_valid():
+        log.save()
+        return Response(log.data)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['GET'])
+def get_user_logs(request, pk):
+    # checking for the parameters from the URL
+    logs = get_list_or_404(Log, user_id = pk)
+    
+    serializer = LogSerializer(logs, many=True)
+    return Response(serializer.data)

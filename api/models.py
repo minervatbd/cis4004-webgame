@@ -15,3 +15,12 @@ class User(models.Model):
 
     def __str__(self) -> str:
         return self.username
+
+class Log(models.Model):
+    user_id = models.PositiveBigIntegerField()
+    game_id = models.PositiveBigIntegerField()
+    rating = models.PositiveIntegerField()
+    progress = models.CharField(max_length = 20)
+
+    def __str__(self) -> str:
+        return self.user_id + " " + self.game_id
