@@ -13,5 +13,7 @@ urlpatterns = [
     path('game/<int:pk>/get/', views.get_game_from_id, name='get-game-from-id'),
     path('user/<int:pk>/', views.get_user_logs, name='get-user-logs'),
     path('createlog/', views.add_log, name='add-logs'),
+    path('log/<int:pk>/delete/', views.delete_logs, name='delete-logs'),
+    path('log/<int:pk>/update/', views.update_logs, name='update-logs')
 ]
 

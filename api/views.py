@@ -124,3 +124,20 @@ def get_user_logs(request, pk):
     
     serializer = LogSerializer(logs, many=True)
     return Response(serializer.data)
+
+@api_view(['DELETE'])
+def delete_logs(request, pk):
+    log = get_object_or_404(Log, pk=pk)
+    log.delete()
+    return Response(status=status.HTTP_202_ACCEPTED)
+
+@api_view(['POST'])
+def update_logs(request, pk):
+    log = Log.objects.get(pk=pk)
+    data = LogSerializer(instance=log, data=request.data)
+ 
+    if data.is_valid():
+        data.save()
+        return Response(data.data)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
