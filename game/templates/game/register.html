@@ -4,21 +4,22 @@
     <head>
         <meta charset="utf-8" />
         <title>Hello</title>
-        <script src="{% static 'game/login.js' %}"></script>
+        <script src="{% static 'game/register.js' %}"></script>
     </head>
     <body>
-        <h1>Login</h1>
-        <form id="loginForm">
+        <h1>Register</h1>
+        <form id="registerForm">
             <label for="username">Username:</label><br>
             <input type="text" id="username" /><br>
+            <label for="email">Email:</label><br>
+            <input type="text" id="email" /><br>
             <label for="password">Password:</label><br>
             <input type="password" id="password" /><br>
             <input type="submit">
-        </form><br><br>
-        <a href="register">Don't have an account? Register here.</a>
+        </form>
         <script>
-            document.getElementById("loginForm").addEventListener("submit", function (e) {
-                login(e);
+            document.getElementById("registerForm").addEventListener("submit", function (e) {
+                registerUser(e);
             });
         </script>
     </body>

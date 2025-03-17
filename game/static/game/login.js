@@ -32,7 +32,7 @@ async function login(event) {
                     alert("Login successful!");
                     localStorage.setItem("userId", data.id);
                     localStorage.setItem("username", data.username);
-                    // TODO redirect to new page
+                    window.location.href = "games";
                 }
         }
     } catch(err) {console.error(err);}
