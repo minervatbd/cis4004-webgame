@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Hello</title>
+        <script src="{% static 'game/register.js' %}"></script>
+    </head>
+    <body>
+        <h1>Register</h1>
+        <form id="registerForm">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" /><br>
+            <label for="email">Email:</label><br>
+            <input type="text" id="email" /><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" /><br>
+            <input type="submit">
+        </form>
+        <script>
+            document.getElementById("registerForm").addEventListener("submit", function (e) {
+                registerUser(e);
+            });
+        </script>
+    </body>
+</html>
