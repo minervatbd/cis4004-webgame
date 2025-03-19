@@ -23,16 +23,16 @@ async function login(event) {
         // user not found
         if (!response.ok) alert("Invalid username/password!");
         else {
-            data = response.json();
+            let data = await response.json();
             if (data.error) {
                     // Handle error
                     alert(data.error);
                 } else {
                     // Handle success
-                    alert("Login successful!");
+                    alert("Login successful! " + data);
                     localStorage.setItem("userId", data.id);
                     localStorage.setItem("username", data.username);
-                    // TODO redirect to new page
+                    window.location.href = "games";
                 }
         }
     } catch(err) {console.error(err);}

@@ -28,7 +28,7 @@ async function registerUser(event) {
                 alert("Registration successful!");
                 localStorage.setItem("userId", data.id);
                 localStorage.setItem("username", newusername);
-                //window.location.href = "";
+                window.location.href = "games";
             }
         })
         .catch((error) => {

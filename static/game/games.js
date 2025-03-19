@@ -1,5 +1,5 @@
 const urlBase = "http://127.0.0.1:8000/api";
-let editingGameId = null;
+let userId = localStorage.getItem("userId");
 
 window.onload = () => {
     searchGames("");
@@ -34,19 +34,30 @@ function displayGames(games) {
         return;
     }
 
-    games.forEach((c) => {
-        console.log(c);
+    games.forEach(async (c) => {
+        let disabled = "";
+        
+        if (await checkForLog(c.id)) disabled = " disabled";
+
         const row = document.createElement("tr");
         row.innerHTML = `
       <td>${c.title}</td>
       <td>${c.developer}</td>
       <td>${c.year}</td>
       <td class="table-actions">
-        <button onclick='deleteGame(${c.id})'>Delete</button>
+        <button onclick="addToCollection(${c.id}, '${c.title}')"${disabled}>Add to library</button>
       </td>
     `;
         tbody.appendChild(row);
     });
+}
+
+async function checkForLog(gameId) {
+    let response = await fetch(`${urlBase}/log/${userId}/${gameId}/`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json"},
+        });
+    return response.ok;
 }
 
 function saveGame() {
@@ -96,4 +107,30 @@ async function deleteGame(gameId) {
         searchGames("");
         
     } catch(err) {console.error(err);}
+}
+
+async function addToCollection(gameId, gameTitle) {
+    const payload = {
+        game_id: gameId,
+        title: gameTitle,
+        user_id: userId,
+        rating: 10,
+        progress: "Playing"
+    }
+
+    fetch(`${urlBase}/createlog/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    })
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.error) {
+                alert("Error adding game to collection: " + data.error);
+            } else {
+                alert("Added game!")
+                }
+                searchGames("");
+        })
+        .catch((err) => console.error(err));
 }
