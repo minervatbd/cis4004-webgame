@@ -19,8 +19,16 @@ class User(models.Model):
 class Log(models.Model):
     user_id = models.PositiveBigIntegerField()
     game_id = models.PositiveBigIntegerField()
+    title = models.CharField(max_length=255, default="defaultTitle")
     rating = models.PositiveIntegerField()
     progress = models.CharField(max_length = 20)
 
     def __str__(self) -> str:
         return self.user_id + " " + self.game_id
+
+{
+        "user_id":"1",
+        "game_id":"15",
+        "rating":"5",
+        "progress":"Finished"
+    }

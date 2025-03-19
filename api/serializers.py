@@ -16,4 +16,4 @@ class UserSerializer(serializers.ModelSerializer):
 class LogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Log
-        fields = ('id', 'user_id', 'game_id', 'rating', 'progress')
+        fields = ('id', 'user_id', 'game_id', 'title', 'rating', 'progress')

@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Hello</title>
+        <script src="{% static 'game/collection.js' %}"></script>
+    </head>
+    <body>
+        <a href="games">View the store</a>
+        <h1>Collection</h1>
+        <input type="text" id="searchInput" placeholder="Search by title..." /><br>
+        <table class="games-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Rating</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="logsBody"></tbody>
+        </table>
+        <script>
+            document.getElementById("searchInput").addEventListener("input", function (e) {
+                searchLogs(e.target.value.trim());
+            });
+        </script>
+    </body>
+</html>

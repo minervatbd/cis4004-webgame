@@ -20,6 +20,7 @@ def ApiOverview(request):
         'Login': '/login',
         'Get Game from ID': '/game/pk/get',
         'Get User Logs': '/user/pk',
+        'Get a Log': '/log/user_id/game_id',
         'Add Log': '/createlog',
         'Edit Log': '/log/pk/update',
         'Delete Log': '/log/pk/delete',
@@ -121,8 +122,21 @@ def add_log(request):
 def get_user_logs(request, pk):
     # checking for the parameters from the URL
     logs = get_list_or_404(Log, user_id = pk)
+
+    if request.query_params:
+        r = request.query_params.dict()
+        r["user_id"] = pk
+        logs = Log.objects.filter(**r)
     
     serializer = LogSerializer(logs, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def get_log(request, user, game):
+    # checking for the parameters from the URL
+    log = get_object_or_404(Log, user_id = user, game_id = game)
+    
+    serializer = LogSerializer(log)
     return Response(serializer.data)
 
 @api_view(['DELETE'])
@@ -134,7 +148,7 @@ def delete_logs(request, pk):
 @api_view(['POST'])
 def update_logs(request, pk):
     log = Log.objects.get(pk=pk)
-    data = LogSerializer(instance=log, data=request.data)
+    data = LogSerializer(instance=log, data=request.data, partial=True)
  
     if data.is_valid():
         data.save()
