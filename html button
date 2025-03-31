@@ -21,8 +21,8 @@
     <script>
         function handleCredentialResponse(response) {
             console.log('Encoded JWT ID token: ' + response.credential);
-            // Send the response.credential to your backend server for verification
-        }
+            //Send the response.credential to backend server for verification
+        
 
         window.onload = function () {
             google.accounts.id.initialize({
@@ -31,7 +31,7 @@
             });
             google.accounts.id.renderButton(
                 document.getElementById("g-signin2"),
-                { theme: "outline", size: "large" }  // Customize button style
+                { theme: "outline", size: "large" }  //Customize button style
             );
         }
     </script>
