@@ -44,6 +44,7 @@ function displayGames(games) {
       <td>${c.title}</td>
       <td>${c.developer}</td>
       <td>${c.year}</td>
+      <td>${c.link}</td>
       <td class="table-actions">
         <button onclick="addToCollection(${c.id}, '${c.title}')"${disabled}>Add to library</button>
       </td>
@@ -64,8 +65,9 @@ function saveGame() {
     const title = document.getElementById("titleInput").value.trim();
     const developer = document.getElementById("developerInput").value.trim();
     const year = document.getElementById("yearInput").value.trim();
+    const link = document.getElementById("linkInput").value.trim();
 
-    if (!title || !developer || !year) {
+    if (!title || !developer || !year || !link) {
         alert("All fields are required");
         return;
     }
@@ -74,7 +76,8 @@ function saveGame() {
     const payload = {
         title,
         developer,
-        year
+        year,
+        link
     }
 
     fetch(`${urlBase}/create/`, {
@@ -134,3 +137,4 @@ async function addToCollection(gameId, gameTitle) {
         })
         .catch((err) => console.error(err));
 }
+
