@@ -18,6 +18,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=255)),
                 ('developer', models.CharField(max_length=255)),
                 ('year', models.PositiveIntegerField()),
+                ('link', models.URLField()),
             ],
         ),
     ]

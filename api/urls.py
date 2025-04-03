@@ -16,5 +16,6 @@ urlpatterns = [
     path('log/<int:pk>/delete/', views.delete_logs, name='delete-logs'),
     path('log/<int:pk>/update/', views.update_logs, name='update-logs'),
     path('log/<int:user>/<int:game>/', views.get_log, name='get-a-log'),
+    path('search/', views.search_online_game, name='search_online_game'),
 ]
 

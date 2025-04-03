@@ -4,6 +4,7 @@ class Game(models.Model):
     title = models.CharField(max_length=255)
     developer = models.CharField(max_length=255)
     year = models.PositiveIntegerField()
+    link = models.URLField(max_length=200, blank=True, null=True)
  
     def __str__(self) -> str:
         return self.title
