@@ -5,6 +5,7 @@
         <meta charset="utf-8" />
         <title>Hello</title>
         <script src="{% static 'game/login.js' %}"></script>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
 
         <style>
             body {background-color: powderblue;}
@@ -32,5 +33,36 @@
                 login(e);
             });
         </script>
+
+<h1>Login with Google</h1>
+<!-- Google Sign-In button -->
+<div id="g_id_onload"
+     data-client_id="698230493400-85mpmflbhlvsamppeo999go3cfki6rnh.apps.googleusercontent.com" 
+     data-login_uri="http://127.0.0.1:8000"
+     data-auto_prompt="false">
+</div>
+
+<div id="g-signin2"></div>
+
+<script>
+    function handleCredentialResponse(response) {
+        console.log('Encoded JWT ID token: ' + response.credential);
+        //Send the response.credential to the backend server for verification
+    }
+
+   window.onload = function () {
+google.accounts.id.initialize({
+    client_id: "698230493400-85mpmflbhlvsamppeo999go3cfki6rnh.apps.googleusercontent.com", 
+    callback: handleCredentialResponse  
+});
+google.accounts.id.renderButton(
+    document.getElementById("g-signin2"),
+    { theme: "outline", size: "large" }  //Customize button style
+);
+};
+
+</script>
+
+
     </body>
 </html>
