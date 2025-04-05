@@ -10,8 +10,8 @@
     <h1>Login with Google</h1>
     <!-- Google Sign-In button -->
     <div id="g_id_onload"
-         data-client_id="YOUR_GOOGLE_CLIENT_ID" 
-         data-login_uri="YOUR_BACKEND_SERVER_URI"
+         data-client_id="698230493400-85mpmflbhlvsamppeo999go3cfki6rnh.apps.googleusercontent.com" 
+         data-login_uri="http://127.0.0.1:8000"
          data-auto_prompt="false">
     </div>
 
@@ -23,16 +23,17 @@
             //Send the response.credential to the backend server for verification
         }
 
-        window.onload = function () {
-            google.accounts.id.initialize({
-                client_id: "YOUR_GOOGLE_CLIENT_ID",
-                callback: handleCredentialResponse
-            });
-            google.accounts.id.renderButton(
-                document.getElementById("g-signin2"),
-                { theme: "outline", size: "large" }  // Customize button style
-            );
-        };
+       window.onload = function () {
+    google.accounts.id.initialize({
+        client_id: "698230493400-85mpmflbhlvsamppeo999go3cfki6rnh.apps.googleusercontent.com", 
+        callback: handleCredentialResponse  
+    });
+    google.accounts.id.renderButton(
+        document.getElementById("g-signin2"),
+        { theme: "outline", size: "large" }  //Customize button style
+    );
+};
+
     </script>
 </body>
 </html>
