@@ -2,13 +2,39 @@
 <html>
 <head>
   <title>Logout Button</title>
-</head>
-<body>
 
-  <!-- Logout Button -->
-  <form action="/logout" method="POST">
-    <button type="submit">Logout</button>
-  </form>
+ <style>
+    .logout-container {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
+
+    .logout-button {
+      padding: 10px 20px;
+      background-color: #f9969f;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .logout-button:hover {
+      background-color: #f15866;
+    }
+  </style>
+  </head>
+
+<body>
+<div class="logout-container">
+    <form action="/logout" method="POST">
+      <button type="submit" class="logout-button">Logout</button>
+    </form>
+  </div>
+
+
 
 </body>
 </html>
