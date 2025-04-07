@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Logout Button</title>
+</head>
+<body>
+
+  <!-- Logout Button -->
+  <form action="/logout" method="POST">
+    <button type="submit">Logout</button>
+  </form>
+
+</body>
+</html>
